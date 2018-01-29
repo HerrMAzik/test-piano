@@ -3,19 +3,29 @@ package com.home.project.model.StackExchange;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Question {
-    private boolean isAnswered;
+    private int answerCount;
     private String title;
     private String link;
     private long creationDate;
     private User owner;
+    private Integer acceptedAnswerId;
 
-    public boolean isAnswered() {
-        return isAnswered;
+    public Integer getAcceptedAnswerId() {
+        return acceptedAnswerId;
     }
 
-    @JsonProperty("is_answered")
-    public void setAnswered(boolean answered) {
-        isAnswered = answered;
+    @JsonProperty("accepted_answer_id")
+    public void setAcceptedAnswerId(Integer acceptedAnswerId) {
+        this.acceptedAnswerId = acceptedAnswerId;
+    }
+
+    public int getAnswerCount() {
+        return answerCount;
+    }
+
+    @JsonProperty("answer_count")
+    public void setAnswerCount(int answerCount) {
+        this.answerCount = answerCount;
     }
 
     public String getTitle() {

@@ -41,7 +41,7 @@ public class HomeController {
 
         SearchResult searchResult = searchService.findQuestionsByTitle(request.getTitle(), request.getPage(), request.getPageSize());
 
-        mav.addObject("questions", searchResult.getItems());
+        mav.addObject("questions", SearchResponse.from(searchResult).getItems());
         return mav;
     }
 }

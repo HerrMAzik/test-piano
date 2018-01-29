@@ -33,4 +33,6 @@ dependencies {
     compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.9.3'
     // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.4'
+    // https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-java8time
+    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time', version: '2.1.0.RELEASE'
 }

@@ -1,10 +1,20 @@
-body {
+html, body {
+    height: 100%;
+    margin: 0;
     font-family: 'Open Sans', sans-serif;
     background-color: #f7f7f7;
     position: relative;
-    margin: 0px;
     font-size: 12px;
     padding: 0px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-content {
+    flex: 1 0 auto;
 }
 
 .page-content > .row {
@@ -20,9 +30,8 @@ footer{
     box-shadow:inset 0px 0px 3px #111;
     color:#fff;
     font-size:14px;
-    line-height:25px;
-    padding:10px 0px 10px 0px;
-    bottom: 0px;
+    padding:0;
+    height: 50px;
 }
 
 footer a{
@@ -35,13 +44,6 @@ footer a:hover{
     color:#aaa;
     text-decoration:none;
     border:0px;
-}
-
-footer hr{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-top: #000 1px solid;
-    border-bottom: #212121 1px solid;
 }
 
 footer .copy{
@@ -222,6 +224,7 @@ footer .copy{
     border-top:1px solid #eee;
     border-right:2px solid #eee;
     border-bottom:2px solid #eee;
+    min-height: 500px;
 }
 
 .content-box-large {
@@ -645,4 +648,20 @@ body {
         box-shadow:0px 0px 1px #0fa6bc;
         border-radius:10px;
     }
+}
+
+p {
+    margin: 0;
+}
+
+img.avatar {
+    height: 20px;
+}
+
+.question-title {
+    font-size: 14px;
+}
+
+.answer-accepted {
+    background-color: green;
 }
