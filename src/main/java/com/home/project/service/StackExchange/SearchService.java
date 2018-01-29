@@ -3,9 +3,11 @@ package com.home.project.service.StackExchange;
 import com.home.project.model.StackExchange.SearchResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
+@Service
 public class SearchService {
     private static final String STACKOVERFLOW = "stackoverflow";
     private static final String FILTER = "!-*jbN0L_TqSV";
