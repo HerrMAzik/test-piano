@@ -50,11 +50,6 @@
                     <p class="advert">Nothing to show</p>
                 </div>
                 <div class="content-box-large" th:if="${not #arrays.isEmpty(questions)}">
-                    <div class="panel-heading row">
-                        <div class="panel-title" th:if="${request.title}">
-                            <span th:utext="${request.title}"></span>
-                        </div>
-                    </div>
                     <div class="dropdown" title="page size">
                         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" th:text="${request.pageSize}">
                             <span class="caret"></span>
@@ -102,6 +97,23 @@
                     </div>
                     <div class="content-footer" th:with="first = (${request.pageSize}*(${request.page}-1)+1)">
                         <span th:text="'Showing '+${first}+' to '+(${first}+${#arrays.length(result.getItems())-1})+' of '+${result.getTotalItemCount()+' items'}"></span>
+                        <nav aria-label="Page navigation" class="footer-pagination">
+                            <ul class="pagination">
+                                <li>
+                                    <a href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>

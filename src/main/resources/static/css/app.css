@@ -101,28 +101,6 @@ footer .copy{
     min-height: 500px;
 }
 
-.panel-heading>.panel-title {
-    float: left;
-    padding-top: 0px;
-}
-
-.panel-heading>.panel-title>* {
-    margin: 0;
-}
-
-.panel-heading>.panel-title>span {
-    font-weight: normal;
-}
-
-.panel-heading>.panel-options {
-    float: right;
-    padding-right: 15px;
-}
-
-.panel-heading>.panel-options>a {
-    margin-top: 10px;
-}
-
 .panel-body {
     clear:both;
 }
@@ -143,6 +121,11 @@ img.avatar {
     height: 20px;
 }
 
+.pagination {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .question-title {
     font-size: 14px;
 }
@@ -160,4 +143,9 @@ img.avatar {
 
 .text-nowrap {
     white-space: nowrap;
+}
+
+.footer-pagination {
+    display: inline-block;
+    float: right;
 }

@@ -1,4 +1,4 @@
-package com.home.project.service.StackExchange;
+package com.home.project.service.stack_exchange;
 
 import java.util.HashMap;
 import java.util.Map;

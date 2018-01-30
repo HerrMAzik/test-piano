@@ -1,4 +1,4 @@
-package com.home.project.model.StackExchange;
+package com.home.project.model.stack_exchange;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -2,8 +2,8 @@ package com.home.project.controller;
 
 import com.home.project.model.SearchRequest;
 import com.home.project.model.SearchResponse;
-import com.home.project.model.StackExchange.SearchResult;
-import com.home.project.service.StackExchange.SearchService;
+import com.home.project.model.stack_exchange.SearchResult;
+import com.home.project.service.stack_exchange.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

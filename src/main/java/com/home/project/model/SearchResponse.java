@@ -1,6 +1,6 @@
 package com.home.project.model;
 
-import com.home.project.model.StackExchange.SearchResult;
+import com.home.project.model.stack_exchange.SearchResult;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;

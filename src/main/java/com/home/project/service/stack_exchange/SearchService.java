@@ -1,6 +1,6 @@
-package com.home.project.service.StackExchange;
+package com.home.project.service.stack_exchange;
 
-import com.home.project.model.StackExchange.SearchResult;
+import com.home.project.model.stack_exchange.SearchResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
