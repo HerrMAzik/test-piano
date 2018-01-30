@@ -44,19 +44,19 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="content-box-small" th:if="${request.title == null}">
-                    <p class="advert">Here could be your advertising</p>
+                    <span class="advert">Here could be your advertising</span>
                 </div>
                 <div class="content-box-small" th:if="${request.title != null} and ${#arrays.isEmpty(questions)}">
-                    <p class="advert">Nothing to show</p>
+                    <span class="advert">Nothing to show</span>
                 </div>
                 <div class="content-box-large" th:if="${not #arrays.isEmpty(questions)}">
                     <div class="dropdown" title="page size">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" th:text="${request.pageSize}">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" th:text="${result.getPageSize()}">
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="page-size-select" th:with="sizeList = ${ {10, 20, 30, 50, 100} }">
 
-                            <li th:each="v : ${sizeList}" th:classappend="${request.pageSize == v} ? 'active' : ''"><a th:attr="data-value=${v}" data-value="20" th:text="${v}" href="#"></a></li>
+                            <li th:each="v : ${sizeList}" th:classappend="${result.getPageSize() == v} ? 'active' : ''"><a th:attr="data-value=${v}" data-value="20" th:text="${v}" href="#"></a></li>
 
                         </ul>
                     </div>
@@ -77,7 +77,7 @@
                                         <span th:case="true" class="badge answer-accepted" th:utext="${item.getAnswerCount()}" th:title="'Accepted with '+${item.getAnswerCount()}+' answer(s)'"></span>
                                     </th:block>
 
-                                    <a th:href="${item.getLink()}" target="_blank">
+                                    <a th:href="${item.getLink()}" target="_blank" title="Go to question's page">
                                         <span class="question-title" th:utext="${item.getTitle()}"></span>
                                     </a>
                                 </td>
@@ -85,7 +85,7 @@
                                 <td class="text-nowrap">
                                     <p>
                                         <img class="avatar" th:src="${#strings.defaultString(item.getPublisherImage(), '/images/avatar.png')}"></img>
-                                        <a th:href="${item.getPublisherLink()}" th:if="${not #strings.isEmpty(item.getPublisherLink())}" target="_blank">
+                                        <a th:href="${item.getPublisherLink()}" th:if="${not #strings.isEmpty(item.getPublisherLink())}" target="_blank" title="Go to user's profile page">
                                             <span th:utext="${item.getPublisherName()}"></span>
                                         </a>
                                         <span th:utext="${item.getPublisherName()}" th:if="${#strings.isEmpty(item.getPublisherLink())}"></span>
@@ -95,20 +95,22 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="content-footer" th:with="first = (${request.pageSize}*(${request.page}-1)+1)">
-                        <span th:text="'Showing '+${first}+' to '+(${first}+${#arrays.length(result.getItems())-1})+' of '+${result.getTotalItemCount()+' items'}"></span>
+                    <div class="content-footer" th:with="firstItemNumber = (${result.getPageSize()}*(${result.getCurrentPage()}-1)+1)">
+                        <span th:text="'Showing '+${firstItemNumber}+' to '+(${firstItemNumber}+${#arrays.length(result.getItems())-1})+' of '+${result.getTotalItemsCount()+' items'}"></span>
                         <nav aria-label="Page navigation" class="footer-pagination">
-                            <ul class="pagination">
-                                <li>
-                                    <a href="#" aria-label="Previous">
+                            <ul class="pagination" id="page-select" th:with="lastPage = ${(result.getTotalItemsCount() + (result.getPageSize() - 1))/result.getPageSize()}">
+                                <li th:classappend="${result.getCurrentPage() == 1} ? 'disabled' : ''">
+                                    <a href="#" aria-label="Previous" th:attr="data-value=${result.getCurrentPage() - 1}">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li>
-                                    <a href="#" aria-label="Next">
+                                <li th:if="${result.getCurrentPage() - 2} > 0"><a href="#" th:text="${result.getCurrentPage() - 2}" th:attr="data-value=${result.getCurrentPage() - 2}"></a></li>
+                                <li th:if="${result.getCurrentPage() - 1} > 0"><a href="#" th:text="${result.getCurrentPage() - 1}" th:attr="data-value=${result.getCurrentPage() - 1}"></a></li>
+                                <li class="active"><a href="#" th:text="${result.getCurrentPage()}" th:attr="data-value=${result.getCurrentPage()}"></a></li>
+                                <li th:if="${result.getCurrentPage() + 1} &lt;= ${lastPage}"><a href="#" th:text="${result.getCurrentPage() + 1}" th:attr="data-value=${result.getCurrentPage() + 1}"></a></li>
+                                <li th:if="${result.getCurrentPage() + 2} &lt;= ${lastPage}"><a href="#" th:text="${result.getCurrentPage() + 2}" th:attr="data-value=${result.getCurrentPage() + 2}"></a></li>
+                                <li th:classappend="(${result.getCurrentPage() == lastPage} or ${lastPage == 0}) ? 'disabled' : ''">
+                                    <a href="#" aria-label="Next" th:attr="data-value=${result.getCurrentPage() + 1}">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>

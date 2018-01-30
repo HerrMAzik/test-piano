@@ -5,6 +5,7 @@ import com.home.project.model.SearchResponse;
 import com.home.project.model.stack_exchange.SearchResult;
 import com.home.project.service.stack_exchange.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,11 +18,13 @@ import java.io.UnsupportedEncodingException;
 public class HomeController {
 
     private final SearchService searchService;
+    private final ConversionService conversionService;
 
     @Autowired
-    public HomeController(SearchService searchService) {
+    public HomeController(SearchService searchService, ConversionService conversionService) {
 
         this.searchService = searchService;
+        this.conversionService = conversionService;
     }
 
     @GetMapping("/")
@@ -39,11 +42,12 @@ public class HomeController {
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("home");
-        mav.addObject("request", request);
 
         SearchResult searchResult = searchService.findQuestionsByTitle(request.getTitle(), request.getPage(), request.getPageSize());
 
-        mav.addObject("result", SearchResponse.from(searchResult));
+        request.setPage(1);
+        mav.addObject("request", request);
+        mav.addObject("result", conversionService.convert(searchResult, SearchResponse.class));
         return mav;
     }
 }

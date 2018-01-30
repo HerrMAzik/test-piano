@@ -1,52 +1,47 @@
 package com.home.project.model;
 
-import com.home.project.model.stack_exchange.SearchResult;
-
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SearchResponse {
 
     private List<SearchItem> items;
 
-    private int totalItemCount;
-
-    public int getTotalItemCount() {
-        return totalItemCount;
-    }
-
-    public void setTotalItemCount(int totalItemCount) {
-        this.totalItemCount = totalItemCount;
-    }
+    private int totalItemsCount;
+    private int currentPage;
+    private int pageSize;
 
     public List<SearchItem> getItems() {
         return items;
     }
 
-    public SearchResponse(List<SearchItem> items, int totalItemCount) {
-        this.items = items;
-        this.totalItemCount = totalItemCount;
+    public int getTotalItemsCount() {
+        return totalItemsCount;
     }
 
-    public static SearchResponse from(SearchResult searchResult) {
+    public void setTotalItemsCount(int totalItemsCount) {
+        this.totalItemsCount = totalItemsCount;
+    }
 
-        List<SearchItem> items = searchResult.getItems().stream().map(q -> {
-            SearchItem item = new SearchItem();
+    public int getCurrentPage() {
+        return currentPage;
+    }
 
-            item.setAnswerCount(q.getAnswerCount());
-            item.setCreationDate(LocalDateTime.ofEpochSecond(q.getCreationDate(), 0, ZoneOffset.UTC));
-            item.setLink(q.getLink());
-            item.setTitle(q.getTitle());
-            item.setPublisherName(q.getOwner().getName());
-            item.setPublisherLink(q.getOwner().getLink());
-            item.setPublisherImage(q.getOwner().getImage());
-            item.setAnswerAccepted(q.getAcceptedAnswerId() != null);
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
 
-            return item;
-        }).collect(Collectors.toList());
+    public int getPageSize() {
+        return pageSize;
+    }
 
-        return new SearchResponse(items, searchResult.getTotalItems());
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public SearchResponse(List<SearchItem> items) {
+        this.items = items;
+    }
+
+    public SearchResponse() {
     }
 }

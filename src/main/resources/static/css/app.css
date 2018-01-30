@@ -95,6 +95,9 @@ footer .copy{
 
 .content-box-small {
     min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .content-box-large {
