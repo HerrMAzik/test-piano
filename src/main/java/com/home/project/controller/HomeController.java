@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.UnsupportedEncodingException;
+
 @Controller
 public class HomeController {
 
@@ -33,7 +35,7 @@ public class HomeController {
     @PostMapping("/")
     public ModelAndView search(
             @ModelAttribute(name = "request")
-            SearchRequest request) {
+            SearchRequest request) throws UnsupportedEncodingException {
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("home");
@@ -41,7 +43,7 @@ public class HomeController {
 
         SearchResult searchResult = searchService.findQuestionsByTitle(request.getTitle(), request.getPage(), request.getPageSize());
 
-        mav.addObject("questions", SearchResponse.from(searchResult).getItems());
+        mav.addObject("result", SearchResponse.from(searchResult));
         return mav;
     }
 }

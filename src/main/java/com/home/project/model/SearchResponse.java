@@ -11,15 +11,27 @@ public class SearchResponse {
 
     private List<SearchItem> items;
 
+    private int totalItemCount;
+
+    public int getTotalItemCount() {
+        return totalItemCount;
+    }
+
+    public void setTotalItemCount(int totalItemCount) {
+        this.totalItemCount = totalItemCount;
+    }
+
     public List<SearchItem> getItems() {
         return items;
     }
 
-    public SearchResponse(List<SearchItem> items) {
+    public SearchResponse(List<SearchItem> items, int totalItemCount) {
         this.items = items;
+        this.totalItemCount = totalItemCount;
     }
 
     public static SearchResponse from(SearchResult searchResult) {
+
         List<SearchItem> items = searchResult.getItems().stream().map(q -> {
             SearchItem item = new SearchItem();
 
@@ -35,6 +47,6 @@ public class SearchResponse {
             return item;
         }).collect(Collectors.toList());
 
-        return new SearchResponse(items);
+        return new SearchResponse(items, searchResult.getTotalItems());
     }
 }

@@ -158,3 +158,6 @@ img.avatar {
     text-align: center;
 }
 
+.text-nowrap {
+    white-space: nowrap;
+}

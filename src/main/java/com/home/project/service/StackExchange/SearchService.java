@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 @Service
 public class SearchService {
     private static final String STACKOVERFLOW = "stackoverflow";
@@ -22,7 +26,7 @@ public class SearchService {
         this.restTemplate = restTemplate;
     }
 
-    public SearchResult findQuestionsByTitle(final String title, final int page, final int pageSize){
+    public SearchResult findQuestionsByTitle(final String title, final int page, final int pageSize) throws UnsupportedEncodingException {
 
         if (StringUtils.isEmpty(title)) {
             return SearchResult.empty();
@@ -34,7 +38,7 @@ public class SearchService {
                 .add("filter", FILTER)
                 .add("pagesize", pageSize)
                 .add("page", page)
-                .add("intitle", title)
+                .add("intitle", URLEncoder.encode(title, StandardCharsets.UTF_8.toString()))
                 .build();
 
         String url = baseUrl + "/search" + params;

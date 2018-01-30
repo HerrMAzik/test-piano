@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <div class="page-content">
+    <div class="page-content" th:with="questions = ${result?.getItems()}">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="content-box-small" th:if="${request.title == null}">
@@ -59,7 +59,7 @@
                         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" th:text="${request.pageSize}">
                             <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="page-size-select" th:with="sizeList = ${ {10, 20, 50, 100} }">
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="page-size-select" th:with="sizeList = ${ {10, 20, 30, 50, 100} }">
 
                             <li th:each="v : ${sizeList}" th:classappend="${request.pageSize == v} ? 'active' : ''"><a th:attr="data-value=${v}" data-value="20" th:text="${v}" href="#"></a></li>
 
@@ -86,8 +86,8 @@
                                         <span class="question-title" th:utext="${item.getTitle()}"></span>
                                     </a>
                                 </td>
-                                <td th:utext="${#temporals.format(item.getCreationDate(), 'MMM dd yyyy HH:mm')}"></td>
-                                <td>
+                                <td class="text-nowrap" th:utext="${#temporals.format(item.getCreationDate(), 'MMM dd yyyy HH:mm')}"></td>
+                                <td class="text-nowrap">
                                     <p>
                                         <img class="avatar" th:src="${#strings.defaultString(item.getPublisherImage(), '/images/avatar.png')}"></img>
                                         <a th:href="${item.getPublisherLink()}" th:if="${not #strings.isEmpty(item.getPublisherLink())}" target="_blank">
@@ -100,7 +100,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="content-footer">123</div>
+                    <div class="content-footer" th:with="first = (${request.pageSize}*(${request.page}-1)+1)">
+                        <span th:text="'Showing '+${first}+' to '+(${first}+${#arrays.length(result.getItems())-1})+' of '+${result.getTotalItemCount()+' items'}"></span>
+                    </div>
                 </div>
             </div>
         </div>
