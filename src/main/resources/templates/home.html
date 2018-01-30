@@ -45,8 +45,8 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="content-box-large">
                     <div class="panel-heading">
-                        <div class="panel-title">Search result
-                            <span th:if="${request.title}">'</span><span th:utext="${request.title}"></span><span th:if="${request.title}">'</span>
+                        <div class="panel-title" th:if="${request.title}">
+                            <span th:utext="'\''+${request.title}+'\''"></span>
                         </div>
                     </div>
                     <div class="panel-body">
