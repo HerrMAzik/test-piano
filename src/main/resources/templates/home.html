@@ -12,7 +12,7 @@
 </head>
 <body>
 
-    <div th:replace="header :: header (${request})"></div>
+    <div th:replace="fragments/header :: header (${request})"></div>
 
     <div class="page-content" th:with="questions = ${result?.getItems()}">
         <div class="row">
@@ -96,7 +96,7 @@
         </div>
     </div>
 
-    <div th:replace="footer :: copy"></div>
+    <div th:replace="fragments/footer :: copy"></div>
 
     <script th:src="@{/scripts/jquery-3.3.1.min.js}"></script>
     <script th:src="@{/scripts/bootstrap.min.js}"></script>
