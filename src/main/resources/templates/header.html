@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div class="header" th:fragment="header (request)">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="logo">
+                    <h1>Stack Overflow Searcher</h1>
+                </div>
+            </div>
+            <div class="col-md-5 pull-right">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form action="#" th:action="@{/}" th:object="${request}" method="post">
+                            <div class="input-group form">
+                                <input id="page" type="hidden" th:field="*{page}"></input>
+                                <input id="page-size" type="hidden" th:field="*{pageSize}"></input>
+                                <input type="text" th:field="*{title}" class="form-control" placeholder="Title..."></input>
+                                <span class="input-group-btn">
+                                    <input class="btn btn-primary" type="submit" value="Search"></input>
+                               </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

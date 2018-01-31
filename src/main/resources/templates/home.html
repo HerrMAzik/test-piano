@@ -11,34 +11,8 @@
     <title>Stack Overflow Searcher</title>
 </head>
 <body>
-    <div class="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5">
-                    <!-- Logo -->
-                    <div class="logo">
-                        <h1>Stack Overflow Searcher</h1>
-                    </div>
-                </div>
-                <div class="col-md-5 pull-right">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <form action="#" th:action="@{/}" th:object="${request}" method="post">
-                            <div class="input-group form">
-                                <input id="page" type="hidden" th:field="*{page}"></input>
-                                <input id="page-size" type="hidden" th:field="*{pageSize}"></input>
-                                <input type="text" th:field="*{title}" class="form-control" placeholder="Title..."></input>
-                                <span class="input-group-btn">
-                                    <input class="btn btn-primary" type="submit" value="Search"></input>
-                               </span>
-                            </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    <div th:replace="header :: header (${request})"></div>
 
     <div class="page-content" th:with="questions = ${result?.getItems()}">
         <div class="row">
@@ -122,13 +96,7 @@
         </div>
     </div>
 
-    <footer>
-        <div class="container">
-            <div class="copy text-center">
-                Copyright 2018 <a href='#'>Website</a>
-            </div>
-        </div>
-    </footer>
+    <div th:replace="footer :: copy"></div>
 
     <script th:src="@{/scripts/jquery-3.3.1.min.js}"></script>
     <script th:src="@{/scripts/bootstrap.min.js}"></script>
