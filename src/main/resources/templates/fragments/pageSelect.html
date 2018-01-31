@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div class="content-footer" th:fragment="pageSelect (page, pageSize, pageItemsCount, totalCount)">
+    <div th:with="firstItemNumber = (${pageSize}*(${page}-1)+1)">
+        <span th:text="'Showing '+${firstItemNumber}+' to '+(${firstItemNumber}+${#arrays.length(pageItemsCount)-1})+' of '+${totalCount+' items'}"></span>
+        <nav aria-label="Page navigation" class="footer-pagination">
+            <ul class="pagination" id="page-select" th:with="lastPage = ${(totalCount + (pageSize - 1))/pageSize}">
+                <li th:classappend="${page == 1} ? 'disabled' : ''">
+                    <a href="#" aria-label="Previous" th:attr="data-value=${page - 1}">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li th:if="${page - 2} > 0"><a href="#" th:text="${page - 2}" th:attr="data-value=${page - 2}"></a></li>
+                <li th:if="${page - 1} > 0"><a href="#" th:text="${page - 1}" th:attr="data-value=${page - 1}"></a></li>
+                <li class="active"><a href="#" th:text="${page}" th:attr="data-value=${page}"></a></li>
+                <li th:if="${page + 1} &lt;= ${lastPage}"><a href="#" th:text="${page + 1}" th:attr="data-value=${page + 1}"></a></li>
+                <li th:if="${page + 2} &lt;= ${lastPage}"><a href="#" th:text="${page + 2}" th:attr="data-value=${page + 2}"></a></li>
+                <li th:classappend="(${page == lastPage} or ${lastPage == 0}) ? 'disabled' : ''">
+                    <a href="#" aria-label="Next" th:attr="data-value=${page + 1}">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+</body>
+
+</html>
