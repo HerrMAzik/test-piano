@@ -41,7 +41,7 @@ public class HomeController {
             SearchRequest request) throws UnsupportedEncodingException {
 
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("home");
+        mav.setViewName("search");
 
         SearchResult searchResult = searchService.findQuestionsByTitle(request.getTitle(), request.getPage(), request.getPageSize());
 
