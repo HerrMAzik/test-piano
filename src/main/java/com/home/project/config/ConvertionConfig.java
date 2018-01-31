@@ -23,7 +23,7 @@ public class ConvertionConfig {
     }
 
     private Set<Converter> getConverters() {
-        Set<Converter> converters = new HashSet<Converter>();
+        Set<Converter> converters = new HashSet<>();
         converters.add(new SearchResultToSearchResponseConverter());
 
         return converters;

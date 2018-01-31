@@ -14,20 +14,9 @@ public class SearchResultToSearchResponseConverter implements Converter<SearchRe
     @Override
     public SearchResponse convert(SearchResult source) {
 
-        List<SearchItem> items = source.getItems().stream().map(q -> {
-            SearchItem item = new SearchItem();
-
-            item.setAnswerCount(q.getAnswerCount());
-            item.setCreationDate(LocalDateTime.ofEpochSecond(q.getCreationDate(), 0, ZoneOffset.UTC));
-            item.setLink(q.getLink());
-            item.setTitle(q.getTitle());
-            item.setPublisherName(q.getOwner().getName());
-            item.setPublisherLink(q.getOwner().getLink());
-            item.setPublisherImage(q.getOwner().getImage());
-            item.setAnswerAccepted(q.getAcceptedAnswerId() != null);
-
-            return item;
-        }).collect(Collectors.toList());
+        List<SearchItem> items = source.getItems().stream()
+                .map(SearchItem::from)
+                .collect(Collectors.toList());
 
         SearchResponse searchResponse = new SearchResponse(items);
 

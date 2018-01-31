@@ -1,6 +1,9 @@
 package com.home.project.model;
 
+import com.home.project.model.stack_exchange.Question;
+
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 public class SearchItem {
     private int answerCount;
@@ -74,5 +77,20 @@ public class SearchItem {
 
     public void setPublisherLink(String publisherLink) {
         this.publisherLink = publisherLink;
+    }
+
+    public static SearchItem from(Question q) {
+        SearchItem item = new SearchItem();
+
+        item.setAnswerCount(q.getAnswerCount());
+        item.setCreationDate(LocalDateTime.ofEpochSecond(q.getCreationDate(), 0, ZoneOffset.UTC));
+        item.setLink(q.getLink());
+        item.setTitle(q.getTitle());
+        item.setPublisherName(q.getOwner().getName());
+        item.setPublisherLink(q.getOwner().getLink());
+        item.setPublisherImage(q.getOwner().getImage());
+        item.setAnswerAccepted(q.getAcceptedAnswerId() != null);
+
+        return item;
     }
 }
