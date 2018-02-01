@@ -1,6 +1,8 @@
 package com.home.project.model;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Objects;
 
 public class SearchResponse {
 
@@ -9,6 +11,12 @@ public class SearchResponse {
     private int totalItemsCount;
     private int currentPage;
     private int pageSize;
+
+    public SearchResponse(@NotNull List<SearchItem> items) {
+        if (items == null)
+            throw new NullPointerException("items must not be null");
+        this.items = items;
+    }
 
     public List<SearchItem> getItems() {
         return items;
@@ -38,10 +46,20 @@ public class SearchResponse {
         this.pageSize = pageSize;
     }
 
-    public SearchResponse(List<SearchItem> items) {
-        this.items = items;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SearchResponse that = (SearchResponse) o;
+        return totalItemsCount == that.totalItemsCount &&
+                currentPage == that.currentPage &&
+                pageSize == that.pageSize &&
+                items.equals(that.items);
     }
 
-    public SearchResponse() {
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(items, totalItemsCount, currentPage, pageSize);
     }
 }

@@ -40,7 +40,7 @@
                                         <span class="question-title" th:utext="${item.getTitle()}"></span>
                                     </a>
                                 </td>
-                                <td class="text-nowrap" th:utext="${#temporals.format(item.getCreationDate(), 'MMM dd yyyy HH:mm')}"></td>
+                                <td class="text-nowrap" th:utext="${item.getCreationDate() != null ? #temporals.format(item.getCreationDate(), 'MMM dd yyyy HH:mm') : 'Unknown'}"></td>
                                 <td class="text-nowrap">
                                     <p>
                                         <img class="avatar" th:src="${#strings.defaultString(item.getPublisherImage(), '/images/avatar.png')}"></img>

@@ -4,6 +4,7 @@ import com.home.project.model.stack_exchange.Question;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Objects;
 
 public class SearchItem {
     private int answerCount;
@@ -83,7 +84,9 @@ public class SearchItem {
         SearchItem item = new SearchItem();
 
         item.setAnswerCount(q.getAnswerCount());
-        item.setCreationDate(LocalDateTime.ofEpochSecond(q.getCreationDate(), 0, ZoneOffset.UTC));
+        if (q.getCreationDate() != null) {
+            item.setCreationDate(LocalDateTime.ofEpochSecond(q.getCreationDate(), 0, ZoneOffset.UTC));
+        }
         item.setLink(q.getLink());
         item.setTitle(q.getTitle());
         item.setPublisherName(q.getOwner().getName());
@@ -92,5 +95,26 @@ public class SearchItem {
         item.setAnswerAccepted(q.getAcceptedAnswerId() != null);
 
         return item;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SearchItem item = (SearchItem) o;
+        return answerCount == item.answerCount &&
+                isAnswerAccepted == item.isAnswerAccepted &&
+                Objects.equals(title, item.title) &&
+                Objects.equals(link, item.link) &&
+                Objects.equals(creationDate, item.creationDate) &&
+                Objects.equals(publisherName, item.publisherName) &&
+                Objects.equals(publisherImage, item.publisherImage) &&
+                Objects.equals(publisherLink, item.publisherLink);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(answerCount, title, link, creationDate, publisherName, publisherImage, publisherLink, isAnswerAccepted);
     }
 }

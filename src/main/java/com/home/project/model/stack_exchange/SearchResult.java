@@ -2,7 +2,7 @@ package com.home.project.model.stack_exchange;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SearchResult {
@@ -50,7 +50,7 @@ public class SearchResult {
 
     public static SearchResult empty(){
         SearchResult searchResult = new SearchResult();
-        searchResult.items = new ArrayList<>();
+        searchResult.items = Collections.emptyList();
         searchResult.totalItems = 0;
         searchResult.page = 1;
         searchResult.pageSize = 0;

@@ -6,7 +6,7 @@ public class Question {
     private int answerCount;
     private String title;
     private String link;
-    private long creationDate;
+    private Long creationDate;
     private User owner;
     private Integer acceptedAnswerId;
 
@@ -46,12 +46,12 @@ public class Question {
         this.link = link;
     }
 
-    public long getCreationDate() {
+    public Long getCreationDate() {
         return creationDate;
     }
 
     @JsonProperty("creation_date")
-    public void setCreationDate(long creationDate) {
+    public void setCreationDate(Long creationDate) {
         this.creationDate = creationDate;
     }
 

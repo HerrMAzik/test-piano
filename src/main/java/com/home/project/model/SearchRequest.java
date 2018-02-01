@@ -1,5 +1,7 @@
 package com.home.project.model;
 
+import java.util.Objects;
+
 public class SearchRequest {
     private String title;
     private int page;
@@ -32,5 +34,21 @@ public class SearchRequest {
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SearchRequest that = (SearchRequest) o;
+        return page == that.page &&
+                pageSize == that.pageSize &&
+                Objects.equals(title, that.title);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(title, page, pageSize);
     }
 }
