@@ -4,9 +4,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class SearchResult {
-    private List<Question> items;
+    private List<Question> items = Collections.emptyList();
 
     private int totalItems;
     private int page;
@@ -50,11 +51,27 @@ public class SearchResult {
 
     public static SearchResult empty(){
         SearchResult searchResult = new SearchResult();
-        searchResult.items = Collections.emptyList();
         searchResult.totalItems = 0;
         searchResult.page = 1;
         searchResult.pageSize = 0;
 
         return searchResult;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SearchResult that = (SearchResult) o;
+        return totalItems == that.totalItems &&
+                page == that.page &&
+                pageSize == that.pageSize &&
+                Objects.equals(items, that.items);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(items, totalItems, page, pageSize);
     }
 }

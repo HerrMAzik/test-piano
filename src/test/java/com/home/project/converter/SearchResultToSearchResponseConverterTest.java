@@ -44,9 +44,10 @@ public class SearchResultToSearchResponseConverterTest {
 
     @Test
     public void Should_Convert_When_ItemsFieldIsNotEmpty() {
-        SearchResult searchResult = new SearchResult();
         Question question = new Question();
         question.setOwner(new User());
+
+        SearchResult searchResult = new SearchResult();
         searchResult.setItems(Arrays.asList(question));
 
         SearchResponse searchResponse = converter.convert(searchResult);

@@ -89,9 +89,11 @@ public class SearchItem {
         }
         item.setLink(q.getLink());
         item.setTitle(q.getTitle());
-        item.setPublisherName(q.getOwner().getName());
-        item.setPublisherLink(q.getOwner().getLink());
-        item.setPublisherImage(q.getOwner().getImage());
+        if (q.getOwner() != null) {
+            item.setPublisherName(q.getOwner().getName());
+            item.setPublisherLink(q.getOwner().getLink());
+            item.setPublisherImage(q.getOwner().getImage());
+        }
         item.setAnswerAccepted(q.getAcceptedAnswerId() != null);
 
         return item;

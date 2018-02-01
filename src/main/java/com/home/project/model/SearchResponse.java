@@ -54,7 +54,7 @@ public class SearchResponse {
         return totalItemsCount == that.totalItemsCount &&
                 currentPage == that.currentPage &&
                 pageSize == that.pageSize &&
-                items.equals(that.items);
+                Objects.equals(items, that.items);
     }
 
     @Override

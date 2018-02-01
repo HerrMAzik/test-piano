@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Configuration
-public class ConvertionConfig {
+public class ConversionConfig {
 
     @Bean
     public ConversionService conversionService() {
