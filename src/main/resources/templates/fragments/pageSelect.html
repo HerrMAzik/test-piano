@@ -7,7 +7,7 @@
 
 <div class="content-footer" th:fragment="pageSelect (page, pageSize, pageItemsCount, totalCount)">
     <div th:with="firstItemNumber = (${pageSize}*(${page}-1)+1)">
-        <span th:text="'Showing '+${firstItemNumber}+' to '+(${firstItemNumber}+${#arrays.length(pageItemsCount)-1})+' of '+${totalCount+' items'}"></span>
+        <span th:text="'Showing '+${firstItemNumber}+' to '+(${firstItemNumber}+${pageItemsCount}-1)+' of '+${totalCount+' items'}"></span>
         <nav aria-label="Page navigation" class="footer-pagination">
             <ul class="pagination" id="page-select" th:with="lastPage = ${(totalCount + (pageSize - 1))/pageSize}">
                 <li th:classappend="${page == 1} ? 'disabled' : ''">
